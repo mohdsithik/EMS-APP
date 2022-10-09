@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-
-const SplashScreen = ({ navigation }) => {
+import React , { useState } from 'react';  
+import { StyleSheet, View, Image,Text } from 'react-native';  
+ const Splashscreen = ({navigation}) => {
   const [timePassed, setTimePassed] = useState(false);
 
   setTimeout(function () {
     setTimePassed(true);
-  }, 1000);
+  }, 500);
 
   if (!timePassed) {
     return (
-      <View >
-        <Text >Splash Screen</Text>
-      </View>
+     <View style={{backgroundColor:'red'}}>
+      <Text>Hello</Text>
+     </View>
     );
   }
   navigation.navigate('Login');
@@ -21,4 +20,4 @@ const SplashScreen = ({ navigation }) => {
 
  
 
-export default SplashScreen;
+export default Splashscreen;

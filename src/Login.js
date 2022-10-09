@@ -33,10 +33,12 @@ const Login = ({ navigation }) => {
       </View>
     <View>
       <View style={{alignItems: 'center', marginTop: 40}}>
+        
         <Image
           style={Styles.Loginimage}
-          source={require('/home/divum/Assignment/EMS/Asserts/Login.png')}
+          source={require('/home/divum/Assignment/EMS/Asserts/profile.png')}
         />
+         
         <View style={Styles.InputContainer}>
           <TextInput  style={Styles.Username} placeholder="Username" placeholderTextColor="black"  onChangeText={setUsername} j/>
           <TextInput style={Styles.Username} placeholder="Password" placeholderTextColor="black" onChangeText={setPassword} secureTextEntry/>
@@ -54,8 +56,10 @@ const Login = ({ navigation }) => {
 };
 const Styles = StyleSheet.create({
   Loginimage: {
-    width: 90,
-    height: 90,
+    padding:20,
+    borderRadius:16,
+    width:60,
+    height:60,
   },
   Username: {
     color:"black",
@@ -84,7 +88,8 @@ const Styles = StyleSheet.create({
   Head:{
     alignItems:"center",
     marginTop:150,
-  }
+  },
+  
   
 });
 

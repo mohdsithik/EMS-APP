@@ -7,7 +7,7 @@ import Create from './src/Create';
 import EmployeeList from './src/EmployeeList';
 import UserInfo from './src/UserInfo';
 import EditDetails from './src/EditDetails';
-import { View } from 'react-native';
+import { View,Text } from 'react-native';
 import SplashScreen from './src/SplashScreen';
  
 
@@ -20,20 +20,14 @@ function App() {
     <NavigationContainer >
      
       <Stack.Navigator screenOptions={{headerStyle:{backgroundColor:"#dec195"}}} >
-        {/* <Stack.Screen name="SplashScreen" component={SplashScreen} /> */}
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Landing" component={Landing} />
+        <Stack.Screen name="Landing" component={Landing}  />
         <Stack.Screen name="Create" component={Create} />
         <Stack.Screen name="Details" component={EmployeeList} />
         <Stack.Screen name="UserInfo" component={UserInfo} />
         <Stack.Screen name="Edit" component={EditDetails} />
-       
-         
-         
-         
-      </Stack.Navigator>
-    
-    </NavigationContainer>
+       </Stack.Navigator>
+   </NavigationContainer>
   
   );
 }
