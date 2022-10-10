@@ -9,7 +9,7 @@ import {
   FlatList,
   Image
 } from 'react-native';
-import {getData} from './Storage';
+import {getData,removeDataObject} from './Storage';
 import Creat from './Create';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import UserInfo from './UserInfo';
@@ -44,11 +44,18 @@ const EmployeeList = ({navigation}) => {
     // console.log(details);
     // alert(JSON.stringify(details));
   };
-  // const Delete= async(ID)=>{
-  //   alert(ID)
+  // const deleteDetails= async(ID)=>{
+   
   //   let data = await getData('userInfo');
+  //   console.log(data);
+  //   // alert(data[ID])
   //   delete data[ID];
-  //   storeData('userInfo', data);
+  //   console.log(data[ID])
+  //    storeData('userInfo', data);
+  //    display();
+  //   // await removeDataObject(data[ID]);
+ 
+   
   // }
   // navigation.navigate("UserInfo")
 
@@ -58,7 +65,7 @@ const EmployeeList = ({navigation}) => {
         
       <TouchableOpacity
         onPress={() => navigation.navigate('UserInfo', {item : item,refresh : onRefresh})}
-        onLongPress={() => alert('Delete')}>
+        onLongPress={() =>alert(item.ID) }>
         <View style={Styles.Usernamelist}>
           <Text style={{color: 'white'}}>
             {item.FirstName} {item.LastName}

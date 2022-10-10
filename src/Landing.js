@@ -1,10 +1,27 @@
 import React, {useState,useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image,Alert} from 'react-native';
 import NavContainer from './NavContainer';
 import {logInSetData, loginGetData, removeData} from './Storage';
 
+
+
 const Landing = ({navigation}) => {
 
+   
+
+  const createThreeButtonAlert = () =>
+  Alert.alert(
+    "Confirmation",
+    "You Sure, that you want to logout?",
+    [
+       
+      {
+        text: "Cancel",
+        style: "cancel"
+      },
+      { text: "OK", onPress: () => Logout() }
+    ]
+  );
     const [Name,setName]=useState('')
   // const [Displayname,setDisplayname]=useState('');
 
@@ -49,7 +66,7 @@ const Landing = ({navigation}) => {
             onPress={() => navigation.navigate('Details')}>
             <Text style={styles.ButtonColor}>Employee List</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'white',padding:5,width:70,borderRadius:8,marginLeft:150,marginTop:20}} onPress={() => Logout()}>
+          <TouchableOpacity style={{backgroundColor:'white',padding:5,width:70,borderRadius:8,marginLeft:150,marginTop:20}} onPress={() => createThreeButtonAlert()}>
         <Text style={{padding:1,textAlign:'center',color:"black"}}>Logout</Text>
       </TouchableOpacity>
         </View>

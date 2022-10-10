@@ -10,7 +10,6 @@ import {
 import { DayPicker } from 'react-day-picker';
 import RadioForm, {
   RadioButton,
-  RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import {storeData, getData} from './Storage';

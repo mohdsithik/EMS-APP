@@ -46,6 +46,20 @@ export const loginGetData = async key => {
   }
 };
 
+export const removeDataObject = async (key) => {
+  try {
+    console.log("LOGOUT");
+    // await AsyncStorage.clear()
+    // await AsyncStorage.removeItem('@'+key);
+
+  } catch(e) {
+    // remove error
+  }
+
+  console.log('Done.')
+}
+
+
 // export const removeData= async key =>{
 //   try {
 //     await AsyncStorage.removeItem(key);
