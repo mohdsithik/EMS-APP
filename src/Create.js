@@ -1,42 +1,34 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   ScrollView,
   StyleSheet,
-  TouchableOpacity,
-  Image
-} from 'react-native';
-import {DayPicker} from 'react-day-picker';
+  TouchableOpacity} from 'react-native';
 import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import {storeData, getData} from './Storage';
 import {TextInput} from 'react-native-paper';
-import {nameList} from './EmployeeList';
-import { color } from 'react-native-reanimated';
 import NavContainer from './NavContainer';
 
 const Creat = ({navigation}) => {
-  const [Gender, SetGender] = useState('');
+  const [Gender, setGender] = useState('');
   const [fname, SetFname] = useState('');
   const [lname, SetLname] = useState('');
   const [Designation, SetDesignation] = useState('');
   const [DOB, SetDOB] = useState('');
   const [DOJ, SetDOj] = useState('');
   const [EmployeeID, SetEmployeeID] = useState('');
-  const [Count, setCount] = useState();
+  const [Count, setCount] = useState(0);
 
-  useEffect(() => {
-    setLength();
-  }, []);
+  // useEffect(() => {
+  //   setLength();
+  // }, []);
 
-  const setLength = async () => {
-    let data = await getData('userInfo');
-    setCount(data.length);
-  };
+  // const setLength = async () => {
+  //   let data = await getData('userInfo');
+  //   setCount(data.length);
+  // };
 
   const person = {
     ID: Count,
@@ -57,15 +49,21 @@ const Creat = ({navigation}) => {
     {label: 'Female', value: 1},
   ];
 
-  const Submit = async () => {
+  const onClickSubmit = async () => {
     let data = await getData('userInfo');
-    setCount(Count + 1);
-    alert("Submitted")
+    setCount(data.length + 1);
+   
     // console.log(data);
     // console.log('Existing data===>',data);
-
+    // let userId = 1;
+    // if(data.length > 0) {
+    //   const lastPerson = data[data.length - 1];
+    //    userId =lastPerson.ID + 1;
+    // }
+    // person.ID = userId;
     data.push(person);
     storeData('userInfo', data);
+    alert("Submitted")
   };
 
   return (
@@ -96,9 +94,9 @@ const Creat = ({navigation}) => {
                 // value ? (value = 1) : (value = 0);
                 // console.log(value);
                 if (value === 0) {
-                  SetGender('Male');
+                  setGender('Male');
                 } else {
-                  SetGender('Female');
+                  setGender('Female');
                 }
               }}
               formHorizontal={true}
@@ -164,7 +162,7 @@ const Creat = ({navigation}) => {
           <TouchableOpacity
             style={styles.Button}
             onPress={() => {
-              Submit();
+              onClickSubmit();
             }}>
             <Text style={{fontSize: 12,color:"white"}}>Submit</Text>
           </TouchableOpacity>

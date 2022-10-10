@@ -64,9 +64,10 @@ const EditDetails=({route,navigation})=>{
    
      data[value.ID]=(person);
     //  console.log(data[value.ID])
+    alert(value.ID)
     storeData('userInfo', data);
     navigation.navigate("Details");
-    alert("Updated")
+    // alert("Updated")
     route.params.refresh()
    
   }
@@ -138,6 +139,7 @@ const EditDetails=({route,navigation})=>{
             mode="outlined"
             value={Designation}
             style={styles.Balance}
+
             onChangeText={text => SetDesignation(text)}
           />
           <TextInput

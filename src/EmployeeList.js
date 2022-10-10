@@ -29,9 +29,10 @@ import NavContainer from './NavContainer';
 const EmployeeList = ({navigation}) => {
   
   const [employeeListDetails, setEmployeeDetails] = useState([]);
+  console.log(employeeListDetails);
   useEffect(() => {
     display();
-  }, [ ]);
+  }, []);
   
   const onRefresh=()=>{
     display();

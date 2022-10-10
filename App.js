@@ -21,12 +21,16 @@ function App() {
     <NavigationContainer >
      
       <Stack.Navigator screenOptions={{headerStyle:{backgroundColor:"#dec195"}}}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Landing" component={Landing}   options={{
+        <Stack.Screen name="Login" component={Login} options={{
             gestureEnabled: false,
-            headerShown: false,
+            headerShown: true,
             headerLeft: () => null,
           }}/>
+        <Stack.Screen name="Landing" component={Landing}  options={{
+            gestureEnabled: false,
+            headerShown: true,
+            headerLeft: () => null,
+          }} />
         <Stack.Screen name="Create" component={Create} options={{
             gestureEnabled: false,
             headerShown: false,
