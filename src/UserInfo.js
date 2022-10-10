@@ -13,6 +13,7 @@ import RadioForm, {
 } from 'react-native-simple-radio-button';
 import {TextInput} from 'react-native-paper';
 import Landing from './Landing';
+import NavContainer from './NavContainer';
  
  
 const UserInfo=( {route,navigation})=>{
@@ -39,12 +40,7 @@ const UserInfo=( {route,navigation})=>{
 
   return (
     <ScrollView style={{backgroundColor:"#dec195",flex:1}}>
-       <View style={{padding:15,flexDirection:'row',}}>
-            <TouchableOpacity onPress={()=>navigation.pop()}>
-                <Image style={{width:32,height:32}} source={require('/home/divum/Assignment/EMS/Asserts/left-arrow.png')}/>
-            </TouchableOpacity>
-            <Text style={{marginLeft:20,fontSize:20,color:"black",margin:4}}>UserInfo</Text>
-         </View>
+     <NavContainer value={'UserInfo'} onPress={()=>navigation.pop()}/>
       <View>
         {/* <TouchableOpacity onPress={()=>{navigation.pop();}}>
           <Text>click</Text>

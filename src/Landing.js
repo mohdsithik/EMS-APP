@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import { View,Text ,StyleSheet,TouchableOpacity,Image} from "react-native";
+import NavContainer from './NavContainer';
  
 const Landing=({route,navigation})=>{
     // const [Displayname,setDisplayname]=useState('');
@@ -16,12 +17,7 @@ const Landing=({route,navigation})=>{
    
     return(
         <View style={{backgroundColor:"#dec195",flex:1}}>
-         <View style={{padding:15,flexDirection:'row',}}>
-            <TouchableOpacity onPress={()=>navigation.pop()}>
-                <Image style={{width:32,height:32}} source={require('/home/divum/Assignment/EMS/Asserts/left-arrow.png')}/>
-            </TouchableOpacity>
-            <Text style={{marginLeft:20,fontSize:20,color:"black",margin:4}}>Landing</Text>
-         </View>
+        <NavContainer value={'Landing'} onPress={()=>navigation.pop()} />
             <View >
             <Text style={styles.Welcome}>Welcome</Text>
             <Text style={{textAlign:"center",fontSize:30,color:"white"}}>{value}</Text>

@@ -9,6 +9,7 @@ import UserInfo from './src/UserInfo';
 import EditDetails from './src/EditDetails';
 import { View,Text } from 'react-native';
 import SplashScreen from './src/SplashScreen';
+
  
 
 const Stack = createStackNavigator();

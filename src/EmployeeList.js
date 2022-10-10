@@ -13,6 +13,7 @@ import {getData} from './Storage';
 import Creat from './Create';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import UserInfo from './UserInfo';
+import NavContainer from './NavContainer';
 
 // export const nameList = async key => {
 //   try {
@@ -69,12 +70,7 @@ const EmployeeList = ({navigation}) => {
 
   return (
     <View style={{backgroundColor: '#dec195', flex: 1}}>
-       <View style={{padding:15,flexDirection:'row',}}>
-            <TouchableOpacity onPress={()=>navigation.pop()}>
-                <Image style={{width:32,height:32}} source={require('/home/divum/Assignment/EMS/Asserts/left-arrow.png')}/>
-            </TouchableOpacity>
-            <Text style={{marginLeft:20,fontSize:20,color:"black",margin:4}}>Employee List</Text>
-         </View>
+      <NavContainer value={"Employee List"} onPress={()=>navigation.pop()} />
       <FlatList data={employeeListDetails} renderItem={renderItem} />
     </View>
   );

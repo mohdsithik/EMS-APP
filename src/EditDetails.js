@@ -15,7 +15,7 @@ import RadioForm, {
 } from 'react-native-simple-radio-button';
 import {storeData, getData} from './Storage';
 import {TextInput} from 'react-native-paper';
- 
+import NavContainer from './NavContainer';
 
 
 
@@ -73,12 +73,7 @@ const EditDetails=({route,navigation})=>{
      
     return(
         <ScrollView style={{backgroundColor:"#dec195",flex:1}}>
-            <View style={{padding:15,flexDirection:'row',}}>
-            <TouchableOpacity onPress={()=>navigation.pop()}>
-                <Image style={{width:32,height:32}} source={require('/home/divum/Assignment/EMS/Asserts/left-arrow.png')}/>
-            </TouchableOpacity>
-            <Text style={{marginLeft:20,fontSize:20,color:"black",margin:4}}>Edit</Text>
-         </View>
+          <NavContainer value={'Edit'} onPress={()=>navigation.pop()}/>
          <View
         style={{
           // flexDirection: 'row',
