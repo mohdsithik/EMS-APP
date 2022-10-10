@@ -3,6 +3,7 @@
   Text,
   ScrollView,
   StyleSheet,
+  Image,
   TouchableOpacity,
 } from 'react-native';
 import RadioForm, {
@@ -38,6 +39,12 @@ const UserInfo=( {route,navigation})=>{
 
   return (
     <ScrollView style={{backgroundColor:"#dec195",flex:1}}>
+       <View style={{padding:15,flexDirection:'row',}}>
+            <TouchableOpacity onPress={()=>navigation.pop()}>
+                <Image style={{width:32,height:32}} source={require('/home/divum/Assignment/EMS/Asserts/left-arrow.png')}/>
+            </TouchableOpacity>
+            <Text style={{marginLeft:20,fontSize:20,color:"black",margin:4}}>UserInfo</Text>
+         </View>
       <View>
         {/* <TouchableOpacity onPress={()=>{navigation.pop();}}>
           <Text>click</Text>

@@ -19,13 +19,33 @@ function App() {
   return (
     <NavigationContainer >
      
-      <Stack.Navigator screenOptions={{headerStyle:{backgroundColor:"#dec195"}}} >
+      <Stack.Navigator screenOptions={{headerStyle:{backgroundColor:"#dec195"}}}>
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Landing" component={Landing}  />
-        <Stack.Screen name="Create" component={Create} />
-        <Stack.Screen name="Details" component={EmployeeList} />
-        <Stack.Screen name="UserInfo" component={UserInfo} />
-        <Stack.Screen name="Edit" component={EditDetails} />
+        <Stack.Screen name="Landing" component={Landing}   options={{
+            gestureEnabled: false,
+            headerShown: false,
+            headerLeft: () => null,
+          }}/>
+        <Stack.Screen name="Create" component={Create} options={{
+            gestureEnabled: false,
+            headerShown: false,
+            headerLeft: () => null,
+          }} />
+        <Stack.Screen name="Details" component={EmployeeList}  options={{
+            gestureEnabled: false,
+            headerShown: false,
+            headerLeft: () => null,
+          }} />
+        <Stack.Screen name="UserInfo" component={UserInfo}  options={{
+            gestureEnabled: false,
+            headerShown: false,
+            headerLeft: () => null,
+          }}/>
+        <Stack.Screen name="Edit" component={EditDetails}  options={{
+            gestureEnabled: false,
+            headerShown: false,
+            headerLeft: () => null,
+          }}/>
        </Stack.Navigator>
    </NavigationContainer>
   

@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Image
 } from 'react-native';
 import { DayPicker } from 'react-day-picker';
 import RadioForm, {
@@ -41,7 +42,7 @@ const EditDetails=({route,navigation})=>{
 
   const person = {
     ID : value.ID,
-    Gender: Gender,
+    Gender: Gender, 
     FirstName: fname,
     LastName: lname,
     Designation: Designation,
@@ -67,13 +68,17 @@ const EditDetails=({route,navigation})=>{
     navigation.navigate("Details");
     alert("Updated")
     route.params.refresh()
-    // alert(JSON.stringify(data)[1])
-    // data.push(person);
    
   }
      
     return(
         <ScrollView style={{backgroundColor:"#dec195",flex:1}}>
+            <View style={{padding:15,flexDirection:'row',}}>
+            <TouchableOpacity onPress={()=>navigation.pop()}>
+                <Image style={{width:32,height:32}} source={require('/home/divum/Assignment/EMS/Asserts/left-arrow.png')}/>
+            </TouchableOpacity>
+            <Text style={{marginLeft:20,fontSize:20,color:"black",margin:4}}>Edit</Text>
+         </View>
          <View
         style={{
           // flexDirection: 'row',

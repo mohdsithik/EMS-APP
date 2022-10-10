@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
+  Image
 } from 'react-native';
 import {getData} from './Storage';
 import Creat from './Create';
@@ -51,6 +52,8 @@ const EmployeeList = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
+      
+        
       <TouchableOpacity
         onPress={() => navigation.navigate('UserInfo', {item : item,refresh : onRefresh})}
         onLongPress={() => alert('Delete')}>
@@ -60,11 +63,18 @@ const EmployeeList = ({navigation}) => {
           </Text>
         </View>
       </TouchableOpacity>
+      
     );
   };
 
   return (
     <View style={{backgroundColor: '#dec195', flex: 1}}>
+       <View style={{padding:15,flexDirection:'row',}}>
+            <TouchableOpacity onPress={()=>navigation.pop()}>
+                <Image style={{width:32,height:32}} source={require('/home/divum/Assignment/EMS/Asserts/left-arrow.png')}/>
+            </TouchableOpacity>
+            <Text style={{marginLeft:20,fontSize:20,color:"black",margin:4}}>Employee List</Text>
+         </View>
       <FlatList data={employeeListDetails} renderItem={renderItem} />
     </View>
   );

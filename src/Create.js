@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Image
 } from 'react-native';
 import {DayPicker} from 'react-day-picker';
 import RadioForm, {
@@ -17,7 +18,7 @@ import {TextInput} from 'react-native-paper';
 import {nameList} from './EmployeeList';
 import { color } from 'react-native-reanimated';
 
-const Creat = () => {
+const Creat = ({navigation}) => {
   const [Gender, SetGender] = useState('');
   const [fname, SetFname] = useState('');
   const [lname, SetLname] = useState('');
@@ -68,6 +69,12 @@ const Creat = () => {
 
   return (
     <ScrollView style={{backgroundColor: '#dec195', flex: 1}}>
+         <View style={{padding:15,flexDirection:'row',}}>
+            <TouchableOpacity onPress={()=>navigation.pop()}>
+                <Image style={{width:32,height:32}} source={require('/home/divum/Assignment/EMS/Asserts/left-arrow.png')}/>
+            </TouchableOpacity>
+            <Text style={{marginLeft:20,fontSize:20,color:"black",margin:4}}>Create</Text>
+         </View>
       <View
         style={{
           // flexDirection: 'row',
