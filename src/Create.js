@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
   View,
   Text,
@@ -19,16 +19,16 @@ const Creat = ({navigation}) => {
   const [DOB, SetDOB] = useState('');
   const [DOJ, SetDOj] = useState('');
   const [EmployeeID, SetEmployeeID] = useState('');
-  const [Count, setCount] = useState(0);
+  const [Count, setCount] = useState();
 
-  // useEffect(() => {
-  //   setLength();
-  // }, []);
+  useEffect(() => {
+    setLength();
+  }, []);
 
-  // const setLength = async () => {
-  //   let data = await getData('userInfo');
-  //   setCount(data.length);
-  // };
+  const setLength = async () => {
+    let data = await getData('userInfo');
+    setCount(data.length);
+  };
 
   const person = {
     ID: Count,
@@ -51,7 +51,7 @@ const Creat = ({navigation}) => {
 
   const onClickSubmit = async () => {
     let data = await getData('userInfo');
-    setCount(data.length + 1);
+    setCount(Count + 1);
    
     // console.log(data);
     // console.log('Existing data===>',data);
