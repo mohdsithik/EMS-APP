@@ -1,23 +1,53 @@
-import React , { useState } from 'react';  
-import { StyleSheet, View, Image,Text } from 'react-native';  
- const Splashscreen = ({navigation}) => {
+import React,{useState} from "react";
+import { View,Image,StyleSheet } from "react-native";
+import {loginGetData} from './Storage';
+ 
+ const SplashScreen=({navigation})=>{
   const [timePassed, setTimePassed] = useState(false);
 
-  setTimeout(function () {
+  setTimeout(() => {
     setTimePassed(true);
-  }, 500);
+  }, 1500);
 
-  if (!timePassed) {
-    return (
-     <View style={{backgroundColor:'red'}}>
-      <Text>Hello</Text>
-     </View>
-    );
-  }
-  navigation.navigate('Login');
-  return null;
-};
-
+  // useEffect(()=>{
+  //   checking()
+  //  },[])
+    const checking=async()=>{
+      let data = await loginGetData('LoginData');
+      if (data.ID && data.pass) {
+        navigation.replace('Landing');
+      }
+      else
+      {
+        navigation.navigate('Login');
+      }
+    }
  
+  if (!timePassed) { 
+  return(
+    <View style={{backgroundColor:"white",flex:1}}>
+      <View style={styles.ImageCover}>
+      <Image style={styles.Image} source={require('/home/divum/Assignment/EMS/Asserts/partnership.png')} />
+      </View>
+    </View>
+  )
+  }
+  // navigation.navigate('Login');
+  checking();
+  return null;
+ }
 
-export default Splashscreen;
+
+ const styles=StyleSheet.create({
+  Image:{
+     width:60,
+     height:60,
+   
+  },
+  ImageCover:{
+        alignItems:'center',
+        marginTop:350
+  }
+ })
+export default SplashScreen;
+ 

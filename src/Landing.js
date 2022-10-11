@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image,Alert} from 'react-native';
-import NavContainer from './NavContainer';
-import {logInSetData, loginGetData, removeData} from './Storage';
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {loginGetData, removeData} from './Storage';
 
 
 

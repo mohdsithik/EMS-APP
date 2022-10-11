@@ -2,17 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  ScrollView,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
-  FlatList,
-  Image
-} from 'react-native';
-import {getData,removeDataObject} from './Storage';
-import Creat from './Create';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import UserInfo from './UserInfo';
+  FlatList} from 'react-native';
+import {getData} from './Storage';
 import NavContainer from './NavContainer';
 
 // export const nameList = async key => {

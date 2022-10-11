@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,27 +9,46 @@ import {
   ScrollView,
   Button,
 } from 'react-native';
+import { Title } from 'react-native-paper';
 import {logInSetData, loginGetData} from './Storage';
 
 const Login = ({navigation}) => {
   const [Username, setUsername] = useState('');
   const [Password, setPassword] = useState('');
 
-  const Login = async () => {
+
+//  useEffect(()=>{
+//   checking()
+//  },[])
+  const checking=async()=>{
+    let data = await loginGetData('LoginData');
+    if (data.ID && data.pass) {
+      navigation.replace('Landing');
+    }
+  }
+
+
+
+  const loginData = async () => {
     // if((Username.trim()=='Sithik' || Username.trim()=='Lokesh') && (Password.trim()=='12345' || Password.trim()=='Lokesh123'))
     // {
     // navigation.navigate('Landing',{userName : Username})
     // }
+  
     const LoginData = {
       ID: Username,
       pass: Password,
     };
     logInSetData('LoginData', LoginData);
+    checking();
     // alert('pushed');
-    let data = await loginGetData('LoginData');
-    if (data.ID && data.pass) {
-      navigation.replace('Landing');
-    }
+    // let data = await loginGetData('LoginData');
+    // if (data.ID && data.pass) {
+    //   navigation.replace('Landing');
+    // }
+    // else{
+    //   alert("Plese enter the username & pasword")
+    // }
   };
   // const checking = async () => {
   //   let data = await loginGetData('LoginData');
@@ -69,7 +88,7 @@ const Login = ({navigation}) => {
             />
           </View>
           <View>
-            <TouchableOpacity style={Styles.Button} onPress={() => Login()}>
+            <TouchableOpacity style={Styles.Button} onPress={() => loginData()}>
               <Text style={{fontSize: 12, color: 'white'}}>Login</Text>
             </TouchableOpacity>
             {/* <Button title="click" onPress={() => checking()} /> */}

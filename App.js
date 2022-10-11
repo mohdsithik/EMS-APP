@@ -7,8 +7,8 @@ import Create from './src/Create';
 import EmployeeList from './src/EmployeeList';
 import UserInfo from './src/UserInfo';
 import EditDetails from './src/EditDetails';
-import { View,Text } from 'react-native';
 import SplashScreen from './src/SplashScreen';
+ 
 
  
 
@@ -16,11 +16,24 @@ const Stack = createStackNavigator();
 
 function App() {
 
-   
+  // useEffect(()=>{
+  //   checking()
+  //  },[])
+  //   const checking=async()=>{
+  //     let data = await loginGetData('LoginData');
+  //     if (data.ID && data.pass) {
+  //        navigation.pop('Landing');
+  //     }
+  //   }
   return (
     <NavigationContainer >
      
       <Stack.Navigator screenOptions={{headerStyle:{backgroundColor:"#dec195"}}}>
+        <Stack.Screen name="SplashScreen" component={SplashScreen}  options={{
+            gestureEnabled: false,
+            headerShown: false,
+            headerLeft: () => null,
+          }}/> 
         <Stack.Screen name="Login" component={Login} options={{
             gestureEnabled: false,
             headerShown: true,
@@ -30,6 +43,7 @@ function App() {
             gestureEnabled: false,
             headerShown: true,
             headerLeft: () => null,
+          
           }} />
         <Stack.Screen name="Create" component={Create} options={{
             gestureEnabled: false,

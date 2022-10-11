@@ -64,6 +64,7 @@ const Creat = ({navigation}) => {
     data.push(person);
     storeData('userInfo', data);
     alert("Submitted")
+    navigation.navigate('Landing')
   };
 
   return (
