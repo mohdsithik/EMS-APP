@@ -27,7 +27,20 @@ const Creat = ({navigation}) => {
 
   const setLength = async () => {
     let data = await getData('userInfo');
-    setCount(data.length);
+    if(data.length==[])
+    {
+      setCount(0);
+    
+    }
+    else
+    {
+    const lastIdex = data.length
+    // console.log('last',lastIdex)
+    setCount(lastIdex+1);
+    console.log('last',lastIdex)
+    }
+     
+     
   };
 
   const person = {
@@ -63,8 +76,8 @@ const Creat = ({navigation}) => {
     // person.ID = userId;
     data.push(person);
     storeData('userInfo', data);
-    alert("Submitted")
-    navigation.navigate('Landing')
+    // alert("Submitted")
+    // navigation.navigate('Landing')
   };
 
   return (

@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList} from 'react-native';
-import {getData} from './Storage';
+import {getData,storeData} from './Storage';
 import NavContainer from './NavContainer';
 
 // export const nameList = async key => {
@@ -37,20 +37,29 @@ const EmployeeList = ({navigation}) => {
     // console.log(details);
     // alert(JSON.stringify(details));
   };
-  // const deleteDetails= async(ID)=>{
+  const deleteDetails= async(ID)=>{
    
-  //   let data = await getData('userInfo');
-  //   console.log(data);
-  //   // alert(data[ID])
-  //   delete data[ID];
-  //   console.log(data[ID])
-  //    storeData('userInfo', data);
-  //    display();
-  //   // await removeDataObject(data[ID]);
+    let data = await getData('userInfo');
+    // alert(ID)
+    // console.log(data);
+    // console.log(data[ID])
+    
+   const index= data.indexOf(data[ID])
+    
+    // console.log('index=========>',index);
+    data.splice(index,1);
+    // console.log(data);
+    
+     storeData('userInfo', data);
+     alert("Deleted");
+     display();
+  
+    
+ 
  
    
-  // }
-  // navigation.navigate("UserInfo")
+  }
+  
 
   const renderItem = ({item}) => {
     return (
@@ -58,7 +67,7 @@ const EmployeeList = ({navigation}) => {
         
       <TouchableOpacity
         onPress={() => navigation.navigate('UserInfo', {item : item,refresh : onRefresh})}
-        onLongPress={() =>alert(item.ID) }>
+        onLongPress={() =>deleteDetails(item.ID) }>
         <View style={Styles.Usernamelist}>
           <Text style={{color: 'white'}}>
             {item.FirstName} {item.LastName}

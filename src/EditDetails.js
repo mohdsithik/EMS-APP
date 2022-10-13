@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import { DayPicker } from 'react-day-picker';
+
 import RadioForm, {
   RadioButton,
   RadioButtonLabel,
@@ -60,13 +60,19 @@ const EditDetails=({route,navigation})=>{
 
   const Update = async () => {
     let data = await getData('userInfo');
-   
-     data[value.ID]=(person);
-    //  console.log(data[value.ID])
-    alert(value.ID)
+    // console.log(data.findIndex(data[value.ID]));
+    // data.filter(element=> {
+    //   if(element.id === value.id) {
+    //     console.log("element", JSON.stringify(element));
+    //   }
+    // })
+    const index=data.indexOf(data[value.ID])
+  //  console.log(data.findIndex(data[value]));
+     data[index]=(person);
+    
     storeData('userInfo', data);
     navigation.navigate("Details");
-    // alert("Updated")
+ 
     route.params.refresh()
    
   }
