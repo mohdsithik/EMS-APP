@@ -21,6 +21,16 @@ const Creat = ({navigation}) => {
   const [EmployeeID, SetEmployeeID] = useState('');
   const [Count, setCount] = useState();
 
+
+  const [userFnameError, setUserFnameError] = useState(false);
+  const [userLnameError, setUserLnameError] = useState(false);
+  const [userDesignationError, setUserDesignationError] = useState(false);
+  const [userDOBError, setUserDOBError] = useState(false);
+  const [userDOJError, setUserDOJError] = useState(false);
+  const [userEmployeeIDError, setUserEmployeeIDError] = useState(false);
+  const [userGenderError, setUserGenderError] = useState(false);
+ 
+
   useEffect(() => {
     setLength();
   }, []);
@@ -53,7 +63,7 @@ const Creat = ({navigation}) => {
     DOJ: DOJ,
     EmployeeID: EmployeeID,
   };
-  console.log(person);
+  
 
   // Storage.set("person", person);
 
@@ -63,22 +73,76 @@ const Creat = ({navigation}) => {
   ];
 
   const onClickSubmit = async () => {
+    if(Gender && fname && lname && Designation && DOB && DOJ && EmployeeID )
+    {
     let data = await getData('userInfo');
     setCount(Count + 1);
-   
-    // console.log(data);
-    // console.log('Existing data===>',data);
-    // let userId = 1;
-    // if(data.length > 0) {
-    //   const lastPerson = data[data.length - 1];
-    //    userId =lastPerson.ID + 1;
-    // }
-    // person.ID = userId;
     data.push(person);
     storeData('userInfo', data);
-    // alert("Submitted")
-    // navigation.navigate('Landing')
+    navigation.navigate('Landing')
+    }
+    else
+    {
+        if(!fname)
+          setUserFnameError(true)
+        if(!lname)
+          setUserLnameError(true)
+        if(!Gender)
+          setUserGenderError(true)
+        if(!Designation)
+          setUserDesignationError(true)
+        if(!EmployeeID)
+          setUserEmployeeIDError(true)
+        if(!DOB)
+          setUserDOBError(true)
+        if(!DOJ)
+          setUserDOJError(true)
+        
+         
+
+    }
+   
+     
   };
+  const onChangeTextValue=(text,TextInputName)=>{
+       switch(TextInputName){
+        case 'FirstName':
+          SetFname(text)
+          setUserFnameError(false)
+          
+          // console.log(person)
+          break;
+        case 'LastName':
+         
+          SetLname(text)
+          setUserLnameError(false)
+           
+          // console.log(person)
+          break;
+        case 'Designation':
+          SetDesignation(text)
+          setUserDesignationError(false)
+          break;
+        case 'DOB':
+          SetDOB(text)
+          // console.log(person)
+          setUserDOBError(false)
+          break;
+        case 'DOJ':
+          SetDOj(text)
+          setUserDOJError(false)
+          break;
+        case 'EmployeeID':
+          SetEmployeeID(text)
+          setUserEmployeeIDError(false)
+          // console.log(person)
+          break;
+
+
+
+        
+       }
+  }
 
   return (
     <ScrollView style={{backgroundColor: '#dec195', flex: 1}}>
@@ -98,6 +162,7 @@ const Creat = ({navigation}) => {
             mode="outlined"
             Outlined="focused"
             style={styles.Name}
+            error={userGenderError}
             // onChangeText={text => Gender(text)}
           />
           <View style={{padding: 19}}>
@@ -109,8 +174,10 @@ const Creat = ({navigation}) => {
                 // console.log(value);
                 if (value === 0) {
                   setGender('Male');
+                  setUserGenderError(false)
                 } else {
                   setGender('Female');
+                  setUserGenderError(false)
                 }
               }}
               formHorizontal={true}
@@ -131,14 +198,25 @@ const Creat = ({navigation}) => {
           mode="outlined"
           Outlined="focused"
           style={styles.Name}
-          onChangeText={text => SetFname(text)}
+          onChangeText={text=> onChangeTextValue(text,"FirstName") }
+         
+          error={userFnameError}
+          
+          
+          
         />
         <TextInput
           label="Last Name"
           value={lname}
           mode="outlined"
           style={styles.Name}
-          onChangeText={text => SetLname(text)}
+          onChangeText={text=> onChangeTextValue(text,"LastName") }
+          error={userLnameError}
+          
+          
+          
+        
+         
         />
       </View>
       <View>
@@ -147,14 +225,16 @@ const Creat = ({navigation}) => {
           mode="outlined"
           value={Designation}
           style={styles.Balance}
-          onChangeText={text => SetDesignation(text)}
+          onChangeText={text=> onChangeTextValue(text,"Designation") }
+          error={userDesignationError}
         />
         <TextInput
           label="DOB"
           mode="outlined"
           value={DOB}
           style={styles.Balance}
-          onChangeText={text => SetDOB(text)}
+          onChangeText={text=> onChangeTextValue(text,"DOB") }
+          error={userDOBError}
         />
 
         <TextInput
@@ -162,7 +242,8 @@ const Creat = ({navigation}) => {
           mode="outlined"
           value={DOJ}
           style={styles.Balance}
-          onChangeText={text => SetDOj(text)}
+          onChangeText={text=> onChangeTextValue(text,"DOJ") }
+          error={userDOJError}
         />
 
         <TextInput
@@ -170,7 +251,8 @@ const Creat = ({navigation}) => {
           mode="outlined"
           value={EmployeeID}
           style={styles.Balance}
-          onChangeText={text => SetEmployeeID(text)}
+          onChangeText={text=> onChangeTextValue(text,"EmployeeID") }
+          error={userEmployeeIDError}
         />
         <View style={{alignItems: 'center'}}>
           <TouchableOpacity

@@ -8,16 +8,7 @@ import {
 import {getData,storeData} from './Storage';
 import NavContainer from './NavContainer';
 
-// export const nameList = async key => {
-//   try {
-//     console.log('key', key);
-//     const jsonValue = JSON.stringify(key);
-//     await AsyncStorage.setItem('key', jsonValue);
-//     alert(jsonValue);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+ 
 
 const EmployeeList = ({navigation}) => {
   
