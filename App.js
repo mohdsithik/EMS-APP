@@ -9,6 +9,7 @@ import UserInfo from './src/UserInfo';
 import EditDetails from './src/EditDetails';
 import SplashScreen from './src/SplashScreen';
  
+ 
 
  
 
@@ -65,6 +66,7 @@ function App() {
             headerShown: false,
             headerLeft: () => null,
           }}/>
+           
        </Stack.Navigator>
    </NavigationContainer>
   

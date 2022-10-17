@@ -7,10 +7,13 @@ import {
   FlatList} from 'react-native';
 import {getData,storeData} from './Storage';
 import NavContainer from './NavContainer';
+import { Modal } from 'react-native-paper';
 
  
 
 const EmployeeList = ({navigation}) => {
+
+  const [modalVisible, setModalVisible] = useState(true);
   
   const [employeeListDetails, setEmployeeDetails] = useState([]);
   console.log(employeeListDetails);
@@ -28,6 +31,14 @@ const EmployeeList = ({navigation}) => {
     // console.log(details);
     // alert(JSON.stringify(details));
   };
+
+  const ModalView=()=>{
+    return(
+      <View>
+        <Text>Mohammed sithik</Text>
+      </View>
+    )
+  }
   const deleteDetails= async(ID)=>{
    
     let data = await getData('userInfo');
@@ -54,26 +65,35 @@ const EmployeeList = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
+      <View>
       
-        
-      <TouchableOpacity
+       <TouchableOpacity
         onPress={() => navigation.navigate('UserInfo', {item : item,refresh : onRefresh})}
         onLongPress={() =>deleteDetails(item.ID) }>
+           {/* onLongPress={() =>deleteDetails(item.ID) }> */}
         <View style={Styles.Usernamelist}>
           <Text style={{color: 'white'}}>
             {item.FirstName} {item.LastName}
           </Text>
         </View>
       </TouchableOpacity>
+      </View>
+     
+     
+      
       
     );
   };
 
   return (
+     
     <View style={{backgroundColor: '#dec195', flex: 1}}>
       <NavContainer value={"Employee List"} onPress={()=>navigation.pop()} />
       <FlatList data={employeeListDetails} renderItem={renderItem} />
+      
     </View>
+    
+   
   );
 };
 const Styles = StyleSheet.create({

@@ -252,6 +252,7 @@ const Creat = ({navigation}) => {
           value={EmployeeID}
           style={styles.Balance}
           onChangeText={text=> onChangeTextValue(text,"EmployeeID") }
+          keyboardType="number-pad"
           error={userEmployeeIDError}
         />
         <View style={{alignItems: 'center'}}>

@@ -1,41 +1,43 @@
-import React, {useState,useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  Button,
+  Image
+} from 'react-native';
+import Modal from 'react-native-modal';
+import { color } from 'react-native-reanimated';
 import {loginGetData, removeData} from './Storage';
 
-
-
 const Landing = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
 
-   
-
-  const createThreeButtonAlert = () =>
-  Alert.alert(
-    "Confirmation",
-    "You Sure, that you want to logout?",
-    [
-       
-      {
-        text: "Cancel",
-        style: "cancel"
-      },
-      { text: "OK", onPress: () => Logout() }
-    ]
-  );
-    const [Name,setName]=useState('')
+  // const createThreeButtonAlert = () =>
+  //   Alert.alert('Confirmation', 'You Sure, that you want to logout?', [
+  //     {
+  //       text: 'Cancel',
+  //       style: 'cancel',
+  //     },
+  //     {text: 'OK', onPress: () => Logout()},
+  //   ]);
+  const [Name, setName] = useState('');
   // const [Displayname,setDisplayname]=useState('');
 
   // console.log(route);
   // const value=route?.params?.userName;
 
   // setDisplayname(route?.params?.userName);
-  useEffect(()=>{
+  useEffect(() => {
     UsernameGet();
-  },[])
+  }, []);
 
-  const UsernameGet=async()=>{
+  const UsernameGet = async () => {
     let data = await loginGetData('LoginData');
-    setName(data.ID)
-  }
+    setName(data.ID);
+  };
 
   // console.log(value);
   const Logout = () => {
@@ -48,7 +50,7 @@ const Landing = ({navigation}) => {
   return (
     <View style={{backgroundColor: '#dec195', flex: 1}}>
       {/* <NavContainer value={'Landing'} onPress={() => navigation.pop()} /> */}
-     
+
       <View>
         <Text style={styles.Welcome}>Welcome</Text>
         <Text style={{textAlign: 'center', fontSize: 30, color: 'white'}}>
@@ -65,15 +67,48 @@ const Landing = ({navigation}) => {
             onPress={() => navigation.navigate('Details')}>
             <Text style={styles.ButtonColor}>Employee List</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'white',padding:5,width:70,borderRadius:8,marginLeft:150,marginTop:20}} onPress={() => createThreeButtonAlert()}>
-        <Text style={{padding:1,textAlign:'center',color:"black"}}>Logout</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: 'white',
+              padding: 5,
+              width: 70,
+              borderRadius: 8,
+              marginLeft: 150,
+              marginTop: 20,
+            }}
+            onPress={() => setModalVisible(true)}>
+            <Text style={{padding: 1, textAlign: 'center', color: 'black'}}>
+              Logout
+            </Text>
+          </TouchableOpacity>
+          <View style={{alignContent:"center"}}> 
+          <Modal
+            visible={modalVisible}
+            animationType="slide">
+            <View style={styles.ModalScreenSize}>
+              <View>
+              <Text style={styles.ConfimationMsg}>Confirmation</Text>
+              <Text style={styles.ConfimationMsg2}>You Sure, that you want to logout?</Text>
+              <Image style={styles.img} source={require('/home/divum/Assignment/EMS/Asserts/logout2.png')} />
+              <View style={{flexDirection:"row",margin:35,justifyContent:"space-evenly"}}>
+              <TouchableOpacity onPress={()=>setModalVisible(false)}>
+                <Text style={styles.ModalButton}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>Logout()}>
+                <Text style={styles.ModalButton}>Logout</Text>
+              </TouchableOpacity>
+              </View>
+              </View>
+              {/* <Button title="click" onPress={() => setModalVisible(false)} /> */}
+            </View>
+          </Modal>
+          </View>
         </View>
       </View>
     </View>
   );
 };
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   Welcome: {
     textAlign: 'center',
     fontSize: 35,
@@ -90,6 +125,46 @@ styles = StyleSheet.create({
   ButtonColor: {
     color: 'white',
   },
+  // ModalContainer: {},
+  
+   
+  ModalScreenSize:{
+   
+    backgroundColor:"white",
+    borderRadius:10,
+    marginLeft:20,
+    marginRight:20,
+    height:300,
+
+
+  },
+  ConfimationMsg:{
+    textAlign:"center",
+    color:"black",
+    margin:20,
+    fontSize:20
+
+  },
+  ConfimationMsg2:{
+    textAlign:"center",
+    fontSize:16,
+    color:"black"
+  },
+  img:{
+    width:150,
+    height:100,
+    alignSelf:"center",
+    marginTop:20
+  },
+  ModalButton:{
+    backgroundColor:"black",
+    color:"white",
+    padding:8,
+    borderRadius:8
+  }
+
+  
+
 });
 
 export default Landing;
