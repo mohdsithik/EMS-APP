@@ -1,15 +1,18 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
   ScrollView,
+  Button,
   StyleSheet,
-  TouchableOpacity} from 'react-native';
-import RadioForm, {
-} from 'react-native-simple-radio-button';
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+import RadioForm from 'react-native-simple-radio-button';
 import {storeData, getData} from './Storage';
 import {TextInput} from 'react-native-paper';
 import NavContainer from './NavContainer';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const Creat = ({navigation}) => {
   const [Gender, setGender] = useState('');
@@ -17,10 +20,9 @@ const Creat = ({navigation}) => {
   const [lname, SetLname] = useState('');
   const [Designation, SetDesignation] = useState('');
   const [DOB, SetDOB] = useState('');
-  const [DOJ, SetDOj] = useState('');
+  const [DOJ, SetDOJ] = useState('');
   const [EmployeeID, SetEmployeeID] = useState('');
   const [Count, setCount] = useState();
-
 
   const [userFnameError, setUserFnameError] = useState(false);
   const [userLnameError, setUserLnameError] = useState(false);
@@ -29,7 +31,6 @@ const Creat = ({navigation}) => {
   const [userDOJError, setUserDOJError] = useState(false);
   const [userEmployeeIDError, setUserEmployeeIDError] = useState(false);
   const [userGenderError, setUserGenderError] = useState(false);
- 
 
   useEffect(() => {
     setLength();
@@ -37,20 +38,14 @@ const Creat = ({navigation}) => {
 
   const setLength = async () => {
     let data = await getData('userInfo');
-    if(data.length==[])
-    {
+    if (data.length == []) {
       setCount(0);
-    
+    } else {
+      const lastIdex = data.length;
+      // console.log('last',lastIdex)
+      setCount(lastIdex + 1);
+      console.log('last', lastIdex);
     }
-    else
-    {
-    const lastIdex = data.length
-    // console.log('last',lastIdex)
-    setCount(lastIdex+1);
-    console.log('last',lastIdex)
-    }
-     
-     
   };
 
   const person = {
@@ -63,7 +58,6 @@ const Creat = ({navigation}) => {
     DOJ: DOJ,
     EmployeeID: EmployeeID,
   };
-  
 
   // Storage.set("person", person);
 
@@ -73,80 +67,82 @@ const Creat = ({navigation}) => {
   ];
 
   const onClickSubmit = async () => {
-    if(Gender && fname && lname && Designation && DOB && DOJ && EmployeeID )
-    {
-    let data = await getData('userInfo');
-    setCount(Count + 1);
-    data.push(person);
-    storeData('userInfo', data);
-    navigation.navigate('Landing')
+    if (Gender && fname && lname && Designation && DOB && DOJ && EmployeeID) {
+      let data = await getData('userInfo');
+      setCount(Count + 1);
+      data.push(person);
+      storeData('userInfo', data);
+      navigation.navigate('Landing');
+    } else {
+      if (!fname) setUserFnameError(true);
+      if (!lname) setUserLnameError(true);
+      if (!Gender) setUserGenderError(true);
+      if (!Designation) setUserDesignationError(true);
+      if (!EmployeeID) setUserEmployeeIDError(true);
+      if (!DOB) setUserDOBError(true);
+      if (!DOJ) setUserDOJError(true);
     }
-    else
-    {
-        if(!fname)
-          setUserFnameError(true)
-        if(!lname)
-          setUserLnameError(true)
-        if(!Gender)
-          setUserGenderError(true)
-        if(!Designation)
-          setUserDesignationError(true)
-        if(!EmployeeID)
-          setUserEmployeeIDError(true)
-        if(!DOB)
-          setUserDOBError(true)
-        if(!DOJ)
-          setUserDOJError(true)
-        
-         
-
-    }
-   
-     
   };
-  const onChangeTextValue=(text,TextInputName)=>{
-       switch(TextInputName){
-        case 'FirstName':
-          SetFname(text)
-          setUserFnameError(false)
-          
-          // console.log(person)
-          break;
-        case 'LastName':
-         
-          SetLname(text)
-          setUserLnameError(false)
-           
-          // console.log(person)
-          break;
-        case 'Designation':
-          SetDesignation(text)
-          setUserDesignationError(false)
-          break;
-        case 'DOB':
-          SetDOB(text)
-          // console.log(person)
-          setUserDOBError(false)
-          break;
-        case 'DOJ':
-          SetDOj(text)
-          setUserDOJError(false)
-          break;
-        case 'EmployeeID':
-          SetEmployeeID(text)
-          setUserEmployeeIDError(false)
-          // console.log(person)
-          break;
+  const onChangeTextValue = (text, TextInputName) => {
+    switch (TextInputName) {
+      case 'FirstName':
+        SetFname(text);
+        setUserFnameError(false);
 
+        // console.log(person)
+        break;
+      case 'LastName':
+        SetLname(text);
+        setUserLnameError(false);
 
+        // console.log(person)
+        break;
+      case 'Designation':
+        SetDesignation(text);
+        setUserDesignationError(false);
+        break;
+      // case 'DOB':
+      //   SetDOB(text);
+      //   // console.log(person)
+      //   setUserDOBError(false);
+      //   break;
+      // case 'DOJ':
+      //   SetDOj(text);
+      //   setUserDOJError(false);
+      //   break;
+      case 'EmployeeID':
+        SetEmployeeID(text);
+        setUserEmployeeIDError(false);
+        // console.log(person)
+        break;
+    }
+  };
 
-        
-       }
+  const [datePicker, setDatePicker] = useState(false);
+  const [datePicker2, setDatePicker2] = useState(false);
+
+  const [date, setDate] = useState(new Date());
+  const [DOJdate, setDOJDate] = useState(new Date());
+
+  function onDateSelected(event, value) {
+    setDatePicker(false);
+    const date2 = new Date(value);
+    SetDOB(
+      date2.getDate() + '-' + date2.getMonth() + '-' + date2.getFullYear(),
+    );
+  }
+  function onDateDOJSelected(event, value) {
+    setDatePicker2(false);
+    const date2 = new Date(value);
+    SetDOJ(
+      date2.getDate() + '-' + date2.getMonth() + '-' + date2.getFullYear(),
+    );
   }
 
   return (
     <ScrollView style={{backgroundColor: '#dec195', flex: 1}}>
-         <NavContainer value={'Create'} onPress={()=>navigation.pop()}/>
+      <NavContainer value={'Create'} onPress={() => navigation.pop()} />
+
       <View
         style={{
           // flexDirection: 'row',
@@ -155,35 +151,46 @@ const Creat = ({navigation}) => {
           marginLeft: 0,
           flexDirection: 'row',
         }}>
-        
-          <TextInput
-            label="Gender"
-            value={Gender}
-            mode="outlined"
-            Outlined="focused"
-            style={styles.Name}
-            error={userGenderError}
-            // onChangeText={text => Gender(text)}
+        <TextInput
+          label="Gender"
+          value={Gender}
+          mode="outlined"
+          Outlined="focused"
+          style={styles.Name}
+          error={userGenderError}
+          // onChangeText={text => Gender(text)}
+        />
+        {/* <Text >Date = {date.toDateString()}</Text> */}
+
+        {datePicker && (
+          <DateTimePicker
+            value={date}
+            mode={'date'}
+            // display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+            is24Hour={true}
+            onChange={onDateSelected}
+            // style={styleSheet.datePicker}
           />
-          <View style={{padding: 19}}>
-            <RadioForm
-              radio_props={radio_props}
-              initial={0}
-              onPress={value => {
-                // value ? (value = 1) : (value = 0);
-                // console.log(value);
-                if (value === 0) {
-                  setGender('Male');
-                  setUserGenderError(false)
-                } else {
-                  setGender('Female');
-                  setUserGenderError(false)
-                }
-              }}
-              formHorizontal={true}
-              buttonSize={15}
-            />
-           
+        )}
+
+        <View style={{padding: 19}}>
+          <RadioForm
+            radio_props={radio_props}
+            initial={0}
+            onPress={value => {
+              // value ? (value = 1) : (value = 0);
+              // console.log(value);
+              if (value === 0) {
+                setGender('Male');
+                setUserGenderError(false);
+              } else {
+                setGender('Female');
+                setUserGenderError(false);
+              }
+            }}
+            formHorizontal={true}
+            buttonSize={15}
+          />
         </View>
       </View>
       <View
@@ -198,25 +205,16 @@ const Creat = ({navigation}) => {
           mode="outlined"
           Outlined="focused"
           style={styles.Name}
-          onChangeText={text=> onChangeTextValue(text,"FirstName") }
-         
+          onChangeText={text => onChangeTextValue(text, 'FirstName')}
           error={userFnameError}
-          
-          
-          
         />
         <TextInput
           label="Last Name"
           value={lname}
           mode="outlined"
           style={styles.Name}
-          onChangeText={text=> onChangeTextValue(text,"LastName") }
+          onChangeText={text => onChangeTextValue(text, 'LastName')}
           error={userLnameError}
-          
-          
-          
-        
-         
         />
       </View>
       <View>
@@ -225,43 +223,70 @@ const Creat = ({navigation}) => {
           mode="outlined"
           value={Designation}
           style={styles.Balance}
-          onChangeText={text=> onChangeTextValue(text,"Designation") }
+          onChangeText={text => onChangeTextValue(text, 'Designation')}
           error={userDesignationError}
         />
-        <TextInput
-          label="DOB"
-          mode="outlined"
-          value={DOB}
-          style={styles.Balance}
-          onChangeText={text=> onChangeTextValue(text,"DOB") }
-          error={userDOBError}
-        />
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <TextInput
+            label="DOB"
+            mode="outlined"
+            value={DOB}
+            style={styles.DOBText}
+            // onChangeText={text => onChangeTextValue(text, 'DOB')}
+            error={userDOBError}
+          />
 
-        <TextInput
-          label="Date Of Joining"
-          mode="outlined"
-          value={DOJ}
-          style={styles.Balance}
-          onChangeText={text=> onChangeTextValue(text,"DOJ") }
-          error={userDOJError}
-        />
+          <TouchableOpacity onPress={() => setDatePicker(true)}>
+            <Image
+              style={styles.DOBIcon}
+              source={require('/home/divum/Assignment/EMS/Asserts/calendar.png')}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <TextInput
+            label="Date Of Joining"
+            mode="outlined"
+            value={DOJ}
+            style={styles.DOBText}
+            onChangeText={text => onChangeTextValue(text, 'DOJ')}
+            error={userDOJError}
+          />
+          <TouchableOpacity onPress={() => setDatePicker2(true)}>
+            <Image
+              style={styles.DOBIcon}
+              source={require('/home/divum/Assignment/EMS/Asserts/calendar.png')}
+            />
+          </TouchableOpacity>
+        </View>
 
         <TextInput
           label="Employee ID"
           mode="outlined"
           value={EmployeeID}
           style={styles.Balance}
-          onChangeText={text=> onChangeTextValue(text,"EmployeeID") }
+          onChangeText={text => onChangeTextValue(text, 'EmployeeID')}
           keyboardType="number-pad"
           error={userEmployeeIDError}
         />
+         {datePicker2 && (
+          <DateTimePicker
+            value={date}
+            mode={'date'}
+            // display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+            is24Hour={true}
+            onChange={onDateDOJSelected}
+            // style={styleSheet.datePicker}
+          />
+        )}
         <View style={{alignItems: 'center'}}>
           <TouchableOpacity
             style={styles.Button}
             onPress={() => {
               onClickSubmit();
             }}>
-            <Text style={{fontSize: 12,color:"white"}}>Submit</Text>
+            <Text style={{fontSize: 12, color: 'white'}}>Submit</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -298,6 +323,21 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 20,
     alignItems: 'center',
+  },
+  DOBIcon: {
+    width: 30,
+    height: 30,
+    marginTop: 60,
+    marginRight: 10,
+  },
+  DOBText: {
+    backgroundColor: 'white',
+    borderRadius: 15,
+    padding: 8,
+    marginTop: 40,
+    margin: 6,
+    marginLeft: 6,
+    flex: 1,
   },
 });
 export default Creat;

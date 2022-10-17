@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
   Alert,
   Button,
-  Image
+  Image,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { color } from 'react-native-reanimated';
+import {color} from 'react-native-reanimated';
 import {loginGetData, removeData} from './Storage';
 
 const Landing = ({navigation}) => {
@@ -81,27 +81,35 @@ const Landing = ({navigation}) => {
               Logout
             </Text>
           </TouchableOpacity>
-          <View style={{alignContent:"center"}}> 
-          <Modal
-            visible={modalVisible}
-            animationType="slide">
-            <View style={styles.ModalScreenSize}>
-              <View>
-              <Text style={styles.ConfimationMsg}>Confirmation</Text>
-              <Text style={styles.ConfimationMsg2}>You Sure, that you want to logout?</Text>
-              <Image style={styles.img} source={require('/home/divum/Assignment/EMS/Asserts/logout2.png')} />
-              <View style={{flexDirection:"row",margin:35,justifyContent:"space-evenly"}}>
-              <TouchableOpacity onPress={()=>setModalVisible(false)}>
-                <Text style={styles.ModalButton}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={()=>Logout()}>
-                <Text style={styles.ModalButton}>Logout</Text>
-              </TouchableOpacity>
+          <View style={{alignContent: 'center'}}>
+            <Modal visible={modalVisible} animationType="slide">
+              <View style={styles.ModalScreenSize}>
+                <View>
+                  <Text style={styles.ConfimationMsg}>Confirmation</Text>
+                  <Text style={styles.ConfimationMsg2}>
+                    You Sure, that you want to logout?
+                  </Text>
+                  <Image
+                    style={styles.img}
+                    source={require('/home/divum/Assignment/EMS/Asserts/logout2.png')}
+                  />
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      margin: 35,
+                      justifyContent: 'space-evenly',
+                    }}>
+                    <TouchableOpacity onPress={() => setModalVisible(false)}>
+                      <Text style={styles.ModalButton}>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => Logout()}>
+                      <Text style={styles.ModalButton}>Logout</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                {/* <Button title="click" onPress={() => setModalVisible(false)} /> */}
               </View>
-              </View>
-              {/* <Button title="click" onPress={() => setModalVisible(false)} /> */}
-            </View>
-          </Modal>
+            </Modal>
           </View>
         </View>
       </View>
@@ -126,45 +134,37 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   // ModalContainer: {},
-  
-   
-  ModalScreenSize:{
-   
-    backgroundColor:"white",
-    borderRadius:10,
-    marginLeft:20,
-    marginRight:20,
-    height:300,
 
-
+  ModalScreenSize: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    height: 300,
   },
-  ConfimationMsg:{
-    textAlign:"center",
-    color:"black",
-    margin:20,
-    fontSize:20
-
+  ConfimationMsg: {
+    textAlign: 'center',
+    color: 'black',
+    margin: 20,
+    fontSize: 20,
   },
-  ConfimationMsg2:{
-    textAlign:"center",
-    fontSize:16,
-    color:"black"
+  ConfimationMsg2: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: 'black',
   },
-  img:{
-    width:150,
-    height:100,
-    alignSelf:"center",
-    marginTop:20
+  img: {
+    width: 150,
+    height: 100,
+    alignSelf: 'center',
+    marginTop: 20,
   },
-  ModalButton:{
-    backgroundColor:"black",
-    color:"white",
-    padding:8,
-    borderRadius:8
-  }
-
-  
-
+  ModalButton: {
+    backgroundColor: 'black',
+    color: 'white',
+    padding: 8,
+    borderRadius: 8,
+  },
 });
 
 export default Landing;
