@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   // ModalContainer: {},
 
   ModalScreenSize: {
-    backgroundColor: 'white',
+    backgroundColor: '#cdafdb',
     borderRadius: 10,
     marginLeft: 20,
     marginRight: 20,

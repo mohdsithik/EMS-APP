@@ -129,7 +129,7 @@ const Creat = ({navigation}) => {
     setUserDOBError(false);
     const date2 = new Date(value);
     SetDOB(
-      date2.getDate() + '/' + date2.getMonth() + '/' + date2.getFullYear(),
+      date2.getDate()+ '/' + (date2.getMonth()+1 )+'/' + date2.getFullYear(),
     );
   }
   function onDateDOJSelected(event, value) {
@@ -137,7 +137,7 @@ const Creat = ({navigation}) => {
     setUserDOJError(false);
     const date2 = new Date(value);
     SetDOJ(
-      date2.getDate() + '/' + date2.getMonth() + '/' + date2.getFullYear(),
+      date2.getDate() + '/' + (date2.getMonth()+1) + '/' + date2.getFullYear(),
     );
   }
 
