@@ -15,6 +15,7 @@ import RadioForm, {
 import {storeData, getData} from './Storage';
 import {TextInput} from 'react-native-paper';
 import NavContainer from './NavContainer';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 
@@ -33,7 +34,7 @@ const EditDetails=({route,navigation})=>{
   const [lname, SetLname] = useState(value.LastName);
   const [Designation, SetDesignation] = useState(value.Designation);
   const [DOB, SetDOB] = useState(value.DOB);
-  const [DOJ, SetDOj] = useState(value.DOJ);
+  const [DOJ, SetDOJ] = useState(value.DOJ);
   const [EmployeeID, SetEmployeeID] = useState(value.EmployeeID);
    
  
@@ -50,7 +51,28 @@ const EditDetails=({route,navigation})=>{
     EmployeeID: EmployeeID,
   };
   // console.log(person);
+  const [datePicker, setDatePicker] = useState(false);
+  const [datePicker2, setDatePicker2] = useState(false);
 
+  const [date, setDate] = useState(new Date());
+  // const [DOJdate, setDOJDate] = useState(new Date());
+
+  function onDateSelected(event, value) {
+    setDatePicker(false);
+    // setUserDOBError(false);
+    const date2 = new Date(value);
+    SetDOB(
+      date2.getDate() + '/' + date2.getMonth() + '/' + date2.getFullYear(),
+    );
+  }
+  function onDateDOJSelected(event, value) {
+    setDatePicker2(false);
+    // setUserDOJError(false);
+    const date2 = new Date(value);
+    SetDOJ(
+      date2.getDate() + '/' + date2.getMonth() + '/' + date2.getFullYear(),
+    );
+  }
   
 
   var radio_props = [
@@ -97,6 +119,26 @@ const EditDetails=({route,navigation})=>{
             style={styles.Name}
             // onChangeText={text => Gender(text)}
           />
+           {datePicker && (
+          <DateTimePicker
+            value={date}
+            mode={'date'}
+            // display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+            is24Hour={true}
+            onChange={onDateSelected}
+            // style={styleSheet.datePicker}
+          />
+        )}
+        {datePicker2 && (
+          <DateTimePicker
+            value={date}
+            mode={'date'}
+            // display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+            is24Hour={true}
+            onChange={onDateDOJSelected}
+            // style={styleSheet.datePicker}
+          />
+        )}
           <View style={{padding: 19}}>
             <RadioForm
               radio_props={radio_props}
@@ -147,22 +189,41 @@ const EditDetails=({route,navigation})=>{
 
             onChangeText={text => SetDesignation(text)}
           />
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <TextInput
             label="DOB"
             mode="outlined"
             value={DOB}
-            style={styles.Balance}
-            onChangeText={text => SetDOB(text)}
+            style={styles.DOBText}
+            // onChangeText={text => onChangeTextValue(text, 'DOB')}
+            // error={userDOBError}
           />
+
+          <TouchableOpacity onPress={() => setDatePicker(true)}>
+            <Image
+              style={styles.DOBIcon}
+              source={require('/home/divum/Assignment/EMS/Asserts/calendar.png')}
+            />
+          </TouchableOpacity>
+        </View>
+
           
-          
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <TextInput
             label="Date Of Joining"
             mode="outlined"
             value={DOJ}
-            style={styles.Balance}
-            onChangeText={text => SetDOj(text)}
+            style={styles.DOBText}
+            onChangeText={text => onChangeTextValue(text, 'DOJ')}
+            // error={userDOJError}
           />
+          <TouchableOpacity onPress={() => setDatePicker2(true)}>
+            <Image
+              style={styles.DOBIcon}
+              source={require('/home/divum/Assignment/EMS/Asserts/calendar.png')}
+            />
+          </TouchableOpacity>
+        </View>
          
           <TextInput
             label="Employee ID"
@@ -209,6 +270,21 @@ const styles = StyleSheet.create({
       borderRadius: 15,
       marginTop: 20,
       alignItems: 'center',
+    },
+    DOBText: {
+      backgroundColor: 'white',
+      borderRadius: 15,
+      padding: 8,
+      marginTop: 40,
+      margin: 6,
+      marginLeft: 6,
+      flex: 1,
+    },
+    DOBIcon: {
+      width: 30,
+      height: 30,
+      marginTop: 60,
+      marginRight: 10,
     },
   });
 export default EditDetails;

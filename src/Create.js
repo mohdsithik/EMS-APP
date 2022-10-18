@@ -101,15 +101,15 @@ const Creat = ({navigation}) => {
         SetDesignation(text);
         setUserDesignationError(false);
         break;
-      // case 'DOB':
-      //   SetDOB(text);
-      //   // console.log(person)
-      //   setUserDOBError(false);
-      //   break;
-      // case 'DOJ':
-      //   SetDOj(text);
-      //   setUserDOJError(false);
-      //   break;
+      case 'DOB':
+        SetDOB(text);
+        // console.log(person)
+        setUserDOBError(false);
+        break;
+      case 'DOJ':
+        SetDOj(text);
+        setUserDOJError(false);
+        break;
       case 'EmployeeID':
         SetEmployeeID(text);
         setUserEmployeeIDError(false);
@@ -122,20 +122,22 @@ const Creat = ({navigation}) => {
   const [datePicker2, setDatePicker2] = useState(false);
 
   const [date, setDate] = useState(new Date());
-  const [DOJdate, setDOJDate] = useState(new Date());
+  // const [DOJdate, setDOJDate] = useState(new Date());
 
   function onDateSelected(event, value) {
     setDatePicker(false);
+    setUserDOBError(false);
     const date2 = new Date(value);
     SetDOB(
-      date2.getDate() + '-' + date2.getMonth() + '-' + date2.getFullYear(),
+      date2.getDate() + '/' + date2.getMonth() + '/' + date2.getFullYear(),
     );
   }
   function onDateDOJSelected(event, value) {
     setDatePicker2(false);
+    setUserDOJError(false);
     const date2 = new Date(value);
     SetDOJ(
-      date2.getDate() + '-' + date2.getMonth() + '-' + date2.getFullYear(),
+      date2.getDate() + '/' + date2.getMonth() + '/' + date2.getFullYear(),
     );
   }
 
