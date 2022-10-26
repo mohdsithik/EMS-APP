@@ -4,32 +4,16 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert,
-  Button,
   Image,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import {color} from 'react-native-reanimated';
 import {loginGetData, removeData} from './Storage';
 
 const Landing = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  // const createThreeButtonAlert = () =>
-  //   Alert.alert('Confirmation', 'You Sure, that you want to logout?', [
-  //     {
-  //       text: 'Cancel',
-  //       style: 'cancel',
-  //     },
-  //     {text: 'OK', onPress: () => Logout()},
-  //   ]);
   const [Name, setName] = useState('');
-  // const [Displayname,setDisplayname]=useState('');
-
-  // console.log(route);
-  // const value=route?.params?.userName;
-
-  // setDisplayname(route?.params?.userName);
+   
   useEffect(() => {
     UsernameGet();
   }, []);
@@ -38,18 +22,15 @@ const Landing = ({navigation}) => {
     let data = await loginGetData('LoginData');
     setName(data.ID);
   };
-
-  // console.log(value);
+ 
   const Logout = () => {
     removeData();
     navigation.navigate('Login');
-    // alert(data)
-    // let data1 = await loginGetData('LoginData');
-    // console.log(data1);
+    
   };
   return (
     <View style={{backgroundColor: '#dec195', flex: 1}}>
-      {/* <NavContainer value={'Landing'} onPress={() => navigation.pop()} /> */}
+    
 
       <View>
         <Text style={styles.Welcome}>Welcome</Text>
@@ -107,7 +88,7 @@ const Landing = ({navigation}) => {
                     </TouchableOpacity>
                   </View>
                 </View>
-                {/* <Button title="click" onPress={() => setModalVisible(false)} /> */}
+                
               </View>
             </Modal>
           </View>
@@ -133,7 +114,7 @@ const styles = StyleSheet.create({
   ButtonColor: {
     color: 'white',
   },
-  // ModalContainer: {},
+ 
 
   ModalScreenSize: {
     backgroundColor: '#cdafdb',

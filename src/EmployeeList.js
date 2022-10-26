@@ -4,96 +4,77 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  FlatList} from 'react-native';
-import {getData,storeData} from './Storage';
+  FlatList,
+  Alert,
+} from 'react-native';
+import {getData, storeData} from './Storage';
 import NavContainer from './NavContainer';
-import { Modal } from 'react-native-paper';
-
- 
 
 const EmployeeList = ({navigation}) => {
-
   const [modalVisible, setModalVisible] = useState(true);
-  
+
   const [employeeListDetails, setEmployeeDetails] = useState([]);
   console.log(employeeListDetails);
   useEffect(() => {
     display();
   }, []);
-  
-  const onRefresh=()=>{
+
+  const onRefresh = () => {
     display();
-  }
+  };
 
   const display = async () => {
     const details = await getData('userInfo');
     setEmployeeDetails(details);
-    // console.log(details);
-    // alert(JSON.stringify(details));
+    
   };
 
-  const ModalView=()=>{
-    return(
-      <View>
-        <Text>Mohammed sithik</Text>
-      </View>
-    )
-  }
-  const deleteDetails= async(ID)=>{
-   
+  const createThreeButtonAlert = ID =>
+    Alert.alert('Confirmation', 'You Sure, that you want to delete?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => deleteDetails(ID)},
+    ]);
+  const deleteDetails = async ID => {
     let data = await getData('userInfo');
-    // alert(ID)
-    // console.log(data);
-    // console.log(data[ID])
     
-   const index= data.indexOf(data[ID])
+
+    const index = data.indexOf(data[ID]);
+
     
-    // console.log('index=========>',index);
-    data.splice(index,1);
-    // console.log(data);
-    
-     storeData('userInfo', data);
-     alert("Deleted");
-     display();
-  
-    
- 
- 
+    data.splice(index, 1);
    
-  }
-  
+
+    storeData('userInfo', data);
+    alert('Deleted');
+    display();
+  };
 
   const renderItem = ({item}) => {
     return (
       <View>
-      
-       <TouchableOpacity
-        onPress={() => navigation.navigate('UserInfo', {item : item,refresh : onRefresh})}
-        onLongPress={() =>deleteDetails(item.ID) }>
-           {/* onLongPress={() =>deleteDetails(item.ID) }> */}
-        <View style={Styles.Usernamelist}>
-          <Text style={{color: 'white'}}>
-            {item.FirstName} {item.LastName}
-          </Text>
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('UserInfo', {item: item, refresh: onRefresh})
+          }
+          onLongPress={() => createThreeButtonAlert(item.ID)}>
+          <View style={Styles.Usernamelist}>
+            <Text style={{color: 'white'}}>
+              {item.FirstName} {item.LastName}
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
-     
-     
-      
-      
     );
   };
 
   return (
-     
     <View style={{backgroundColor: '#dec195', flex: 1}}>
-      <NavContainer value={"Employee List"} onPress={()=>navigation.pop()} />
+      <NavContainer value={'Employee List'} onPress={() => navigation.pop()} />
       <FlatList data={employeeListDetails} renderItem={renderItem} />
-      
     </View>
-    
-   
   );
 };
 const Styles = StyleSheet.create({

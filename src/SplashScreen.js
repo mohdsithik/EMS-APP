@@ -8,10 +8,7 @@ import {loginGetData} from './Storage';
   setTimeout(() => {
     setTimePassed(true);
   }, 1500);
-
-  // useEffect(()=>{
-  //   checking()
-  //  },[])
+ 
     const checking=async()=>{
       let data = await loginGetData('LoginData');
       if (data.ID && data.pass) {
@@ -24,6 +21,7 @@ import {loginGetData} from './Storage';
     }
  
   if (!timePassed) { 
+    console.log(!timePassed);
   return(
     <View style={{backgroundColor:"white",flex:1}}>
       <View style={styles.ImageCover}>
@@ -32,7 +30,7 @@ import {loginGetData} from './Storage';
     </View>
   )
   }
-  // navigation.navigate('Login');
+  
   checking();
   return null;
  }

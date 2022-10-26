@@ -16,16 +16,7 @@ import SplashScreen from './src/SplashScreen';
 const Stack = createStackNavigator();
 
 function App() {
-
-  // useEffect(()=>{
-  //   checking()
-  //  },[])
-  //   const checking=async()=>{
-  //     let data = await loginGetData('LoginData');
-  //     if (data.ID && data.pass) {
-  //        navigation.pop('Landing');
-  //     }
-  //   }
+ 
   return (
     <NavigationContainer >
      

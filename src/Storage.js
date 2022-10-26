@@ -7,7 +7,7 @@ export const storeData = async (key, value) => {
     console.log('StoreData', key, 'dgtg', value);
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem('@'+key, jsonValue);
-    // alert(jsonValue)
+ 
   } catch (e) {
     console.log(e);
   }
@@ -59,16 +59,7 @@ export const removeDataObject = async (key) => {
   console.log('Done.')
 }
 
-
-// export const removeData= async key =>{
-//   try {
-//     await AsyncStorage.removeItem(key);
-//     return true;
-// }
-// catch(exception) {
-//     return false;
-// }
-// }
+ 
 export const removeData = async () => {
   try {
     console.log("LOGOUT");
